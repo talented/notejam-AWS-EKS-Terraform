@@ -13,8 +13,6 @@ services:
     ports:
       - 5000:5000
     environment:
-      # - FLASK_APP=project/__init__.py
-      # - FLASK_ENV=development
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
     depends_on:
       - db

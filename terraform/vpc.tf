@@ -36,6 +36,7 @@ resource "aws_subnet" "public_subnet1" {
     Name = "${var.cluster_name}-public1"
     # https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/deploy/subnet_discovery/
     "kubernetes.io/role/elb" = 1
+    "kubernetes.io/cluster/eks" = "shared"
   }
 }
 
@@ -69,6 +70,7 @@ resource "aws_subnet" "public_subnet2" {
     Name = "${var.cluster_name}-public2"
     # https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/deploy/subnet_discovery/
     "kubernetes.io/role/elb" = 1
+    "kubernetes.io/cluster/eks" = "shared"
   }
 }
 
@@ -103,6 +105,7 @@ resource "aws_subnet" "private_subnet1" {
     Name = "${var.cluster_name}-private1"
     # https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/deploy/subnet_discovery/
     "kubernetes.io/role/internal-elb" = 1
+    "kubernetes.io/cluster/eks" = "shared"
   }
 }
 
@@ -139,6 +142,8 @@ resource "aws_subnet" "private_subnet2" {
     Name = "${var.cluster_name}-private2"
     # https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/deploy/subnet_discovery/
     "kubernetes.io/role/internal-elb" = 1
+    "kubernetes.io/cluster/eks" = "shared"
+
   }
 }
 

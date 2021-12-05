@@ -74,7 +74,7 @@ variable "db_engine" {
 variable "db_instance_class" {
   description = "The instance type to use for the database instances"
   type        = string
-  default     = "db.t2.micro"
+  default     = "db.t3.small"
 }
 
 variable "db_multi_az" {
