@@ -62,4 +62,6 @@ USER app
 
 EXPOSE 5000
 
+RUN cd $APP_HOME
+
 ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:5000", "runserver:app"]
