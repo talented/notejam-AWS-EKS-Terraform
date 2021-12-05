@@ -186,17 +186,8 @@ resource "aws_eks_node_group" "k8s" {
 # Registries
 #
 
-resource "aws_ecr_repository" "frontend" {
-  name                 = "${var.cluster_name}-frontend"
-  image_tag_mutability = "IMMUTABLE"
-
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-}
-
-resource "aws_ecr_repository" "api" {
-  name                 = "${var.cluster_name}-api"
+resource "aws_ecr_repository" "backend" {
+  name                 = "${var.cluster_name}-backend"
   image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {

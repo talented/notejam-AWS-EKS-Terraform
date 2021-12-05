@@ -47,14 +47,10 @@ output "k8s_cacert_data" {
   value = aws_eks_cluster.k8s.certificate_authority[0].data
 }
 
-output "registry_frontend" {
-  value = aws_ecr_repository.frontend.repository_url
+output "registry_backend" {
+  value = aws_ecr_repository.backend.repository_url
 }
 
-output "registry_api" {
-  value = aws_ecr_repository.api.repository_url
-}
-
-output "cert_manager_role_arn" {
-  value = aws_iam_role.cert_manager.arn
-}
+# output "cert_manager_role_arn" {
+#   value = aws_iam_role.cert_manager.arn
+# }
