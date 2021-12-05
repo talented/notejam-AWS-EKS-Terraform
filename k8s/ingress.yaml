@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: notejam-ingress
+spec:
+  rules:
+  - host: "a5257876d687544e992ee575e5185e44-c660c6cab0283f03.elb.eu-central-1.amazonaws.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: notejam-service
+            port:
+              number: 80
