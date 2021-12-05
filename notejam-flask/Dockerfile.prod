@@ -52,7 +52,7 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache /wheels/*
 
 # copy project
-COPY . $APP_HOME
+COPY ./notejam-flask $APP_HOME
 
 # chown all the files to the app user
 RUN chown -R app:app $APP_HOME
@@ -62,5 +62,4 @@ USER app
 
 EXPOSE 5000
 
-# ENTRYPOINT ["uvicorn", "--host", "0.0.0.0", "--port", "80", "--app-dir", "/opt/api/quipper", "--reload", "main:app"]
-ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0", "--port", "5000", "runserver:app"]
+ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:5000", "runserver:app"]
