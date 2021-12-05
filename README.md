@@ -13,3 +13,6 @@ Run functional and unit tests:
 
     $ cd YOUR_PROJECT_DIR/flask/
     $ python tests.py
+
+
+test
