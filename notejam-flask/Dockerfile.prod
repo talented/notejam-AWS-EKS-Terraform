@@ -18,10 +18,10 @@ RUN apt-get update && \
 
 RUN pip install --upgrade pip
 
-COPY . .
+COPY ./notejam-flask .
 
 # install python dependencies
-COPY ./requirements.txt .
+COPY ./notejam-flask/requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
 
