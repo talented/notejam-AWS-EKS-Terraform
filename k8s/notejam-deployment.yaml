@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notejam
+  labels:
+    app: notejam
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notejam
+  template:
+    metadata:
+      labels:
+        app: notejam
+    spec:
+      containers:
+      - name: notejam
+        image: REGISTRY_URL:IMAGE_VERSION
+        ports:
+        - containerPort: 80
+        env:
+        - name: POSTGRES_URL
+          value: DB_ENDPOINT
+        - name: POSTGRES_DB
+          value: DB_NAME
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: db_user
+        - name: POSTGRES_PASS
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: db_pass
+

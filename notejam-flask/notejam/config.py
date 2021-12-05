@@ -14,10 +14,10 @@ class Config(object):
     WTF_CSRF_ENABLED = True
     CSRF_SESSION_KEY = 'notejam-flask-secret-key'
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'notejam.db')
-    DATABASE_URL = f"postgresql://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASSWORD']}@{os.environ['DOMAIN_NAME']}:5432/{os.environ['POSTGRES_DB']}" 
-    # DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-    # SQLALCHEMY_DATABASE_URI = DATABASE_URL
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+    DATABASE_URL = f"postgresql://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASS']}@{os.environ['POSTGRES_URL']}/{os.environ['POSTGRES_DB']}" 
+    # DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASS}@db:5432/${POSTGRES_DB}
+    SQLALCHEMY_DATABASE_URI = DATABASE_URL
+    # SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
     # SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite://")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
