@@ -51,6 +51,6 @@ output "registry_backend" {
   value = aws_ecr_repository.backend.repository_url
 }
 
-# output "cert_manager_role_arn" {
-#   value = aws_iam_role.cert_manager.arn
-# }
+output "cert_manager_role_arn" {
+  value = aws_iam_role.cert_manager.arn
+}

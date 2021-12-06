@@ -7,7 +7,6 @@ services:
       context: ./notejam-flask
       dockerfile: Dockerfile.prod
     command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; gunicorn --bind 0.0.0.0:5000 runserver:app'
-    # entrypoint: /app/docker-entrypoint.sh
     volumes:
       - ./notejam-flask:/app
     ports:

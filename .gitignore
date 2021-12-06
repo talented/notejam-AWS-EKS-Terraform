@@ -9,3 +9,5 @@ terraform-test/
 .terraform/
 secrets/
 tmp/
+*.backup
+.lock.hcl
