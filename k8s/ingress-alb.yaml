@@ -10,23 +10,23 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/ssl-redirect: '443'
-    alb.ingress.kubernetes.io/target-type: ip
+    # alb.ingress.kubernetes.io/target-type: ip
     cert-manager.io/cluster-issuer: CLUSTER_NAME
     kubernetes.io/ingress.class: alb
     kubernetes.io/tls-acme: "true"
 spec:
   tls:
     - hosts:
-        - api.ROUTE53_ZONE_FQDN
+        - ROUTE53_ZONE_FQDN
       secretName: notejam-tls
   rules:
-    - host: api.ROUTE53_ZONE_FQDN
+    - host: ROUTE53_ZONE_FQDN
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: notejam
+                name: notejam-service
                 port:
                   number: 80

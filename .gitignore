@@ -10,4 +10,5 @@ terraform-test/
 secrets/
 tmp/
 *.backup
+*.org
 .lock.hcl

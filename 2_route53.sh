@@ -18,4 +18,4 @@ aws route53 create-hosted-zone \
 # List the nameservers for your zone:
 cat tmp/create-hosted-zone.out | jq -r '.DelegationSet.NameServers[]'
 
-# Now modify your DNS servers to use the hosts listed above.
+# Now modify your DNS servers to use the hosts listed.

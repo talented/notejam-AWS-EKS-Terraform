@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# First check if the cluster already has an OIDC provider:
 OIDC=$(aws eks describe-cluster --region $(terraform -chdir=terraform output -raw aws_region) \
     --name $(terraform -chdir=terraform output -raw k8s_cluster_name) \
     --query "cluster.identity.oidc.issuer"  \
