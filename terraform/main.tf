@@ -14,22 +14,9 @@ provider "aws" {
   region  = var.aws_region
 }
 
-
 # Used to get access to the effective account and user that Terraform
 # is running as. Ref: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
 data "aws_caller_identity" "current" {}
-
-# variable "key_name" {}
-
-# resource "tls_private_key" "generated" {
-#   algorithm = "RSA"
-#   rsa_bits  = 4096
-# }
-
-# resource "aws_key_pair" "authorized_key" {
-#   key_name   = var.key_name
-#   public_key = tls_private_key.generated.public_key_openssh
-# }
 
 resource "aws_key_pair" "authorized_key" {
   key_name   = var.ec2_key_name

@@ -1,9 +1,17 @@
 #!/bin/bash
 
-aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicy \
-    --policy-document file://k8s/aws-lb-controller/iam-policy.json | \
-  tee tmp/aws-load-balancer-controller-iam-policy.json
+set -exuo pipefail
+
+# https://aws.amazon.com/premiumsupport/knowledge-center/eks-alb-ingress-controller-setup/
+
+policy_file="./k8s/aws-lb-controller/iam-policy.json"
+
+if [[ ! -n $policy_file ]]; then
+    aws iam create-policy \
+        --policy-name AWSLoadBalancerControllerIAMPolicy \
+        --policy-document file://k8s/aws-lb-controller/iam-policy.json | \
+    tee tmp/aws-load-balancer-controller-iam-policy.json
+fi
 
 aws_account_id=$(terraform -chdir=terraform output -raw aws_account_id)
 k8s_cluster_name=$(terraform -chdir=terraform output -raw k8s_cluster_name)
