@@ -1,4 +1,5 @@
 # **Kubernetes Deployment of Notejam application on AWS EKS with Terraform**
+Notejam flask application with postgres DB on RDS. Kubernetes Deployment on AWS EKS by provisioning with Terraform. Github Actions to build docker images to be pushed to AWS ECR.
 
 ## Architecture:
 
