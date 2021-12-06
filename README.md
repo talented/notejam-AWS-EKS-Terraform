@@ -2,6 +2,7 @@
 Notejam flask application with postgres DB on RDS. Kubernetes Deployment on AWS EKS by provisioning with Terraform. Github Actions to build docker images to be pushed to AWS ECR.
 
 ## Architecture:
+![Screenshot](aws_1.svg)
 
 ## Prerequisities:
 - [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04) & [Docker-compose](https://docs.docker.com/compose/install/)

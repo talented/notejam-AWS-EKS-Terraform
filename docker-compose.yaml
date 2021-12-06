@@ -5,16 +5,18 @@ services:
     container_name: notejam_web
     build: 
       context: ./notejam-flask
-      dockerfile: Dockerfile.prod
     command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; gunicorn --bind 0.0.0.0:5000 runserver:app'
     volumes:
       - ./notejam-flask:/app
     ports:
       - 5000:5000
-    environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASS}@db:5432/${POSTGRES_DB}
+    # environment:
+    #   - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASS}@${POSTGRES_URL}/${POSTGRES_DB}
     depends_on:
       - db
+    networks:
+      - api_bridge
+    
 
   db:
     container_name: notejam_db
@@ -26,6 +28,14 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASS=${POSTGRES_PASS}
       - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - 5432
+    networks:
+      - api_bridge
 
 volumes:
   postgres_data:
+
+networks:
+  api_bridge:
+    driver: bridge

@@ -15,10 +15,8 @@ class Config(object):
     CSRF_SESSION_KEY = 'notejam-flask-secret-key'
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'notejam.db')
     DATABASE_URL = f"postgresql://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASS']}@{os.environ['POSTGRES_URL']}/{os.environ['POSTGRES_DB']}" 
-    # DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASS}@db:5432/${POSTGRES_DB}
     SQLALCHEMY_DATABASE_URI = DATABASE_URL
     # SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
-    # SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite://")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig(Config):

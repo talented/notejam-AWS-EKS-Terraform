@@ -21,4 +21,4 @@ cat k8s/notejam-deployment.yaml | \
   sed 's@IMAGE_VERSION@'"${image_version}"'@' | \
   sed 's@DB_ENDPOINT@'"${db_endpoint}"'@' | \
   sed 's@DB_NAME@'"${db_name}"'@' | \
-  kubectl apply -n test -f -
+  kubectl apply -n staging -f -
