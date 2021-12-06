@@ -17,6 +17,7 @@ db_name=$(terraform -chdir=terraform output -raw db_name)
 
 cat k8s/notejam-deployment.yaml | \
   sed 's@REGISTRY_URL@'"${registry}"'@' | \
+  sed 's@REGISTRY_URL@'"${registry}"'@' | \
   sed 's@CLUSTER_NAME@'"${cluster_name}"'@' | \
   sed 's@IMAGE_VERSION@'"${image_version}"'@' | \
   sed 's@DB_ENDPOINT@'"${db_endpoint}"'@' | \

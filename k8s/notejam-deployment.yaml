@@ -16,9 +16,12 @@ spec:
     spec:
       containers:
       - name: notejam
+        # image: notejam-deployment-backend:v1
         image: REGISTRY_URL:IMAGE_VERSION
+        # command: ["gunicorn", "-b 0.0.0.0:5000", "run:gunicorn_app"]
+        imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 80
+        - containerPort: 5000
         env:
         - name: POSTGRES_URL
           value: DB_ENDPOINT
