@@ -21,13 +21,13 @@ cat k8s/notejam-deployment.yaml | \
   sed 's@IMAGE_VERSION@'"${image_version}"'@' | \
   sed 's@DB_ENDPOINT@'"${db_endpoint}"'@' | \
   sed 's@DB_NAME@'"${db_name}"'@' | \
-  kubectl apply -n staging -f -
+  kubectl apply -n production -f -
 
 # expose pods
-kubectl apply -f k8s/notejam-service.yaml -n staging
+kubectl apply -f k8s/notejam-service.yaml -n production
 
 # apply ingress with application load balancer
-cat k8s/ingress-alb.yaml | \
+cat k8s/notejam-ingress-alb.yaml | \
   sed 's@ROUTE53_ZONE_FQDN@'"${route53_zone_fqdn}"'@' | \
   sed 's@CLUSTER_NAME@'"${cluster_name}"'@' | \
-  kubectl apply -n staging -f -
+  kubectl apply -n production -f -

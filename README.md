@@ -7,13 +7,26 @@ Notejam flask application with postgres DB on RDS. Kubernetes Deployment on AWS 
 ## Prerequisities:
 - [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04) & [Docker-compose](https://docs.docker.com/compose/install/)
 - [AWS client Setup](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
-- [Terraform]((https://www.terraform.io/downloads.html))
+- [Terraform](https://www.terraform.io/downloads.html)
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 - [Eksctl](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 - [Helm](https://helm.sh/docs/intro/install/)
 
+## Development Environment with docker-compose
+```
+# update dotenv file under notejam-flask with your credentials and run docker-compose
+mv notejam-flask/dotenv notejam-flask/.env
+docker-compose --env-file notejam-flask/.env up -d
+```
+- notejam application can be visited at port 5000
+- You can run tests in docker container:
+```
+docker exec -it notejam_web sh
+python tests.py
+```
 
-## Steps
+# Provisioning AWS EKS with Terraform
+##  Steps
 1. Update terraform.tfvars with your own config variables and ssh-key. When ready, initiate terraform:
 ```
 terraform -chdir=terraform init
@@ -54,15 +67,26 @@ aws ecr get-login-password --region $(terraform -chdir=terraform output -raw aws
 | docker login --username AWS --password-stdin $(terraform -chdir=terraform output -raw registry_backend)
 ```
 8. Associate EKS cluster with OpenID Connect Provider ([Guide](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)): `./4_OIDC_associate.sh`
+<br><br>
 9. Install cert-manager ([Guide](https://cert-manager.io/)) `./5_cert_manager.sh`
 - make sure that pods are in Running state: `kubectl -n cert-manager get pods`
 10. Install Load Balancer Controller ([Guide](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/deploy/installation/)): `./6_LB_controller.sh`
+<br><br>
 11. Create cert-manager cluster issuer ([Guide](https://cert-manager.io/docs/configuration/acme/dns01/route53/)): `./7_cluster_issuer.sh`
+<br><br>
 12. Create Namespaces: `kubectl apply -f k8s/namespaces.yaml`
+<br><br>
 13. Create Secrets for Postgres Credentials (Alternatively, a more robust and secure solution would be to use AWS Secrets Manager service &rarr; [Guide](https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver.html)): `./8_k8s_secrets.sh` 
 - This will be created under 'staging' namespace since I will be deploying the application under this namespace. This should be modified to be used in a CI/CD system.
 14. Github actions will build a notejam image and push to AWS ECR after each git push to master branch.
-- Run `deploy_k8s.sh` to create a deployment and expose it with a k8s service. 
+- Setting up the github actions scripts are based on this [guide](https://github.com/antonputra/tutorials/tree/main/lessons/086)
+***
+### Kubernetes deployment under staging namespace
+- Run `deploy_k8s_staging.sh` to create a deployment and expose it with a k8s service and NLB.
+
+### Kubernetes deployment under production namespace
+- Run `deploy_k8s_production.sh` to create a deployment and expose it with a k8s service and ALB.
+
 
 
 

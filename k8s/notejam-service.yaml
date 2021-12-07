@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: notejam-service
+  name: internal-notejam-service
   labels:
-    service: notejam-service
-  # annotations:
-  #   service.beta.kubernetes.io/aws-load-balancer-type: nlb
-  #   service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
-  #   service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
+    service: internal-notejam-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
   #    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:xx-xxxx-x:xxxxxxxxx:xxxxxxx/xxxxx-xxxx-xxxx-xxxx-xxxxxxxxx #replace this value
   #    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
 spec:
@@ -16,6 +16,24 @@ spec:
     - port: 80
       targetPort: 5000
       protocol: TCP
-  type: NodePort # LoadBalancer
+  type: LoadBalancer
+  selector:
+    app: notejam
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-notejam-service
+  labels:
+    service: external-notejam-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+spec:
+  ports:
+    - port: 80
+      targetPort: 5000
+      protocol: TCP
+  type: LoadBalancer
   selector:
     app: notejam

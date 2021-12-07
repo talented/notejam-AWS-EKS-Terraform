@@ -5,13 +5,11 @@ services:
     container_name: notejam_web
     build: 
       context: ./notejam-flask
-    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; gunicorn --bind 0.0.0.0:5000 runserver:app'
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 3; done; python db.py && gunicorn --bind 0.0.0.0:5000 runserver:app'
     volumes:
       - ./notejam-flask:/app
     ports:
       - 5000:5000
-    # environment:
-    #   - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASS}@${POSTGRES_URL}/${POSTGRES_DB}
     depends_on:
       - db
     networks:
@@ -25,9 +23,9 @@ services:
       - postgres_data:/var/lib/postgresql/data/
       - ./notejam-flask/scripts:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASS=${POSTGRES_PASS}
-      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER:?err}
+      - POSTGRES_PASSWORD=${POSTGRES_PASS:?err}
+      - POSTGRES_DB=${POSTGRES_DB:?err}
     ports:
       - 5432
     networks:

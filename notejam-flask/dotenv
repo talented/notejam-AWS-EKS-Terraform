@@ -1,0 +1,5 @@
+SECRET_KEY="very secret key"
+POSTGRES_USER=postgres_user
+POSTGRES_PASS=postgres_pass
+POSTGRES_DB=db
+POSTGRES_URL=db:5432
