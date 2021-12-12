@@ -24,7 +24,8 @@ cat k8s/notejam-deployment.yaml | \
   kubectl apply -n staging -f -
 
 # expose pods
-kubectl apply -f k8s/notejam-service.yaml -n staging
+kubectl apply -f k8s/service-loadbalancer.yaml -n staging
+# kubectl apply -f k8s/notejam-service.yaml -n staging
 
 # apply ingress with network load balancer
-kubectl apply -f k8s/notejam-ingress.yaml -n staging
+# kubectl apply -f k8s/notejam-ingress.yaml -n staging

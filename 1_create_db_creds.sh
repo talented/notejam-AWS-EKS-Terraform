@@ -8,6 +8,7 @@ if [ ! -d "$secrets_dir" ]; then
 fi
 
 aws_profile=$(grep -E ' *aws_profile *=' terraform/terraform.tfvars | sed -E 's/ *aws_profile *= *"(.*)"/\1/g')
+# terraform -chdir=terraform output aws_profile | cut -d\" -f2
 aws_region=$(grep -E ' *aws_region *=' terraform/terraform.tfvars | sed -E 's/ *aws_region *= *"(.*)"/\1/g')
 cluster_name=$(grep -E ' *cluster_name *=' terraform/terraform.tfvars | sed -E 's/ *cluster_name *= *"(.*)"/\1/g')
 db_credentials_secret_name=${cluster_name}-db-credentials
