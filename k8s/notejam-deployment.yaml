@@ -36,4 +36,11 @@ spec:
             secretKeyRef:
               name: postgres-credentials
               key: db_pass
+        resources:
+          limits:
+            cpu: 256m
+            memory: 512Mi
+          requests:
+            cpu: 128m
+            memory: 128Mi
 

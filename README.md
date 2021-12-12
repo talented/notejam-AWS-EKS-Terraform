@@ -82,10 +82,17 @@ aws ecr get-login-password --region $(terraform -chdir=terraform output -raw aws
 - Setting up the github actions scripts are based on this [guide](https://github.com/antonputra/tutorials/tree/main/lessons/086)
 ***
 ### Kubernetes deployment under staging namespace
-- Run `deploy_k8s_staging.sh` to create a deployment and expose it with a k8s service and NLB.
+- Run `deploy_k8s_alb.sh` to create a deployment and expose it with a k8s service and ALB.
+- Import the Key and Cert to ACM and add FQDN to Route53
+```
+# Run below script to push the key and cert to ACM in ingress file:
+./9_sync_tls_resources.sh
 
-### Kubernetes deployment under production namespace
-- Run `deploy_k8s_production.sh` to create a deployment and expose it with a k8s service and ALB.
+Run below to update DNS record to point to ALB:
+./10_route53_recordset.sh
+```
+
+
 
 
 

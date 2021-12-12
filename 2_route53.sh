@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # First, get a hold of an FQDN that you own and define it in an env var:
-route53_zone_fqdn="simulator.sh"
+route53_zone_fqdn=simulator.sh
 
 # Let's also create a unique caller reference:
 route53_caller_reference=$(uuidgen | tr -d '-')

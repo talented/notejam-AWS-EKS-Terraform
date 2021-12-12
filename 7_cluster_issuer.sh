@@ -2,7 +2,7 @@
 
 # deploy the cluster issuer
 
-route53_zone_fqdn=$(cat tmp/create-hosted-zone.out | jq -r '.HostedZone.Name' | rev | cut -c2- | rev)
+route53_zone_fqdn=$(cat tmp/create-hosted-zone.out | jq -r '.HostedZone.Name' | rev | cut -c2- | rev) # sed 's/.$//'
 route53_zone_id=$(cat tmp/create-hosted-zone.out | jq -r '.HostedZone.Id')
 cluster_name=$(terraform -chdir=terraform output -raw cluster_name)
 aws_region=$(terraform -chdir=terraform output -raw aws_region)
