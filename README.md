@@ -72,7 +72,7 @@ aws ecr get-login-password --region $(terraform -chdir=terraform output -raw aws
 - make sure that pods are in Running state: `kubectl -n cert-manager get pods`
 10. Install Load Balancer Controller ([Guide](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/deploy/installation/)): `./6_LB_controller.sh`
 <br><br>
-11. Create cert-manager cluster issuer ([Guide](https://cert-manager.io/docs/configuration/acme/dns01/route53/)): `./7_cluster_issuer.sh`
+11. Create cert-manager cluster issuer ([Guide](https://cert-manager.io/docs/configuration/acme/dns01/route53/) and [Link](https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/1084#issuecomment-725566515)): `./7_cluster_issuer.sh`
 <br><br>
 12. Create Namespaces: `kubectl apply -f k8s/namespaces.yaml`
 <br><br>
