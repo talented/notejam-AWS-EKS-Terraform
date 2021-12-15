@@ -1,5 +1,5 @@
 data "aws_secretsmanager_secret_version" "db_creds" {
-  secret_id = "${var.cluster_name}-db-credentials"
+  secret_id = "${var.cluster_name}-db-credentials-0"
 }
 
 

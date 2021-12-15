@@ -5,6 +5,8 @@ metadata:
   name: notejam-service
   labels:
     service: notejam-service 
+  # annotations:
+    # service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 spec:
   ports:
     - port: 80

@@ -36,6 +36,14 @@ spec:
             secretKeyRef:
               name: postgres-credentials
               key: db_pass
+        livenessProbe:
+            exec:
+              command: 
+                - /bin/sh
+                - -c 
+                - nc -z localhost 5000
+            initialDelaySeconds: 60
+            periodSeconds: 10
         resources:
           limits:
             cpu: 256m

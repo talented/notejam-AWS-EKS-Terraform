@@ -28,7 +28,11 @@ cat k8s/notejam-deployment.yaml | \
 kubectl apply -f k8s/notejam-service.yaml -n $namespace
 
 # apply ingress with application load balancer
-cat k8s/notejam-ingress-alb.yaml | \
-  sed 's@ROUTE53_ZONE_FQDN@'"${route53_zone_fqdn}"'@' | \
-  sed 's@CLUSTER_NAME@'"${cluster_name}"'@' | \
-  kubectl apply -n $namespace -f -
+# cat k8s/notejam-ingress-alb.yaml | \
+#   sed 's@ROUTE53_ZONE_FQDN@'"${route53_zone_fqdn}"'@' | \
+#   sed 's@CLUSTER_NAME@'"${cluster_name}"'@' | \
+#   kubectl apply -n $namespace -f -
+
+# don't forget to check logs
+# kubectl logs -n kube-system aws-load-balancer-controller-*
+# kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o 'aws-load-balancer-controller[a-zA-Z0-9-]+') | grep 'notejam'

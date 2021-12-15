@@ -97,6 +97,3 @@ Run below to update DNS record to point to ALB:
 
 
 
-
-
-
